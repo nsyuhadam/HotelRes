@@ -104,4 +104,20 @@ class BookingsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function searchbooking()
+{ 
+   if ($this -> request-> is(['patch','post','put']))
+
+   {
+       $search = $this-> request->data['search'];
+       
+    $user = $this-> Bookings->find('all')
+                ->where (['Bookings.bookId LIKE' => '%'.$search. '%']);
+    
+    $this->set(compact('user'));
+    $this->set('_serialize',['user']);
+
+  }
+}
 }
